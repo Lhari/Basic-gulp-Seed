@@ -1,7 +1,7 @@
 /*
 * Advanced gulp task manager
 * Allows direct github pushing with messages
-* Use --type master and production to push to master and dev branch
+* Use --mode master and production to push to master and dev branch
 * use --message 'message' to input commit message
 */
 
@@ -21,19 +21,18 @@ var	gulp 		= 		require('gulp'),
 	prefix 		= 		require('gulp-autoprefixer'),
 	jade 		= 		require('gulp-jade');
 
-var isMaster = args.type === 'master';
-var isProduction = args.type === 'production';
+var isMaster = args.mode === 'master';
+var isProduction = args.mode === 'production';
 var message = args.message;
 
 /*
 * Set input and output from gulpfile
-*
 */
 
 var input = 'source';
 var output = 'assets';
 
-// ----- Task handling SCSS compile, depending on type, file will either be minified or extended
+// ----- Task handling SCSS compile, depending on mode, file will either be minified or extended
 
 gulp.task('styles', function() {
 	gulp.src( input+'/sass/**/*.scss' )
@@ -111,7 +110,7 @@ gulp.task('master', function() {
 		.pipe( notify( 'Version number: 1.0.0' ) )
 });
 
-// ----- Manages everything, run gulp, gulp --type master/production --message 'message' for correct output
+// ----- Manages everything, run gulp, gulp --mode master/production --message 'message' for correct output
 
 gulp.task('default', function() {
 	gulp.src( input+'/**/*.*' )
@@ -119,7 +118,7 @@ gulp.task('default', function() {
 	gulp.run('styles');
 	gulp.run('js-top');
 	gulp.run('js-bottom');
-	
+
 	if(isProduction) {
 		gulp.run( 'production' )
 	} else if(isMaster) {
@@ -127,5 +126,4 @@ gulp.task('default', function() {
 	} else {
 		gulp.run( 'watch-only' )
 	}
-
 });
