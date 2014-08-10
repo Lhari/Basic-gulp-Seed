@@ -1,0 +1,17 @@
+.side__recruitment {
+	.side__recruitment--name {
+		font-size: $font-small;
+	}
+	.side__recruitment--value span{
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		display:block;
+		&.open {
+			background: $green-color;
+		}
+		&.closed {
+			border: 2px solid $red-color;
+		}
+	}
+}

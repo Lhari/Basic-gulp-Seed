@@ -1,3 +1,10 @@
+/*
+* Advanced gulp task manager
+* Allows direct github pushing with messages
+* Use --type master and production to push to master and dev branch
+* use --message 'message' to input commit message
+*/
+
 var	gulp 		= 		require('gulp'),
 	git			=		require('gulp-git'),
 	args		=		require('yargs').argv,
@@ -18,8 +25,15 @@ var isMaster = args.type === 'master';
 var isProduction = args.type === 'production';
 var message = args.message;
 
+/*
+* Set input and output from gulpfile
+*
+*/
+
 var input = 'source';
 var output = 'assets';
+
+// ----- Task handling SCSS compile, depending on type, file will either be minified or extended
 
 gulp.task('styles', function() {
 	gulp.src( input+'/sass/**/*.scss' )
@@ -30,6 +44,8 @@ gulp.task('styles', function() {
 		.pipe( gulp.dest( output+'/css' ) )
 });
 
+// ----- Task handling javascript file for top-loading on a site
+
 gulp.task('js-top', function() {
 	gulp.src([
 			'bower_components/modernizr/modernizr.js',
@@ -39,6 +55,8 @@ gulp.task('js-top', function() {
 		.pipe( gulpif (isMaster, uglify() ) )
 		.pipe( gulp.dest( output+'/js' ) )
 })
+
+// ----- Task handling javascript file for bottom-loading on a site
 
 gulp.task('js-bottom', function() {
 	gulp.src([
@@ -52,6 +70,9 @@ gulp.task('js-bottom', function() {
 		.pipe( gulp.dest( output+'/js' ) )
 });
 
+// ----- Task handling for compiling jade files for template generation
+// TODO: Add load from correct includes file
+
 gulp.task('template', function() {
  	gulp.src( input+'/template/*.jade' )
 	 	.pipe( changed( input+'/template/**/*.jade' ) )
@@ -59,11 +80,15 @@ gulp.task('template', function() {
 	 	.pipe( gulp.dest( './' ) )
 });
 
+// ----- Watch task to make sure scripts gets run on local development
+
 gulp.task('watch-only', function() {
 	gulp.watch( input+'/template/*.jade', ['template'] );
-	gulp.watch( input+'source/sass/**/*.scss', ['styles'] );
+	gulp.watch( input+'/sass/**/*.scss', ['styles'] );
 	gulp.watch( input+'/js/**/*.js', ['js-bottom'] );
 });
+
+// ----- Pushes to development branch on github
 
 gulp.task('production', function() {
 	return gulp.src('')
@@ -73,6 +98,8 @@ gulp.task('production', function() {
 		.pipe( git.push() )
 		.pipe( notify( 'Files pushed to dev branch of Github with the title: '+message ) )
 });
+
+// ----- Pushes to master branch on github
 
 gulp.task('master', function() {
 	return gulp.src('')
@@ -84,16 +111,21 @@ gulp.task('master', function() {
 		.pipe( notify( 'Version number: 1.0.0' ) )
 });
 
+// ----- Manages everything, run gulp, gulp --type master/production --message 'message' for correct output
+
 gulp.task('default', function() {
 	gulp.src( input+'/**/*.*' )
 	gulp.run('template');
 	gulp.run('styles');
 	gulp.run('js-top');
 	gulp.run('js-bottom');
-	/*
-	gulp.src('')
-		.pipe( gulpif( isProduction, gulp.run( 'production' ) ) )
-		.pipe( gulpif( isMaster, gulp.run( 'master' ) ) )
-		.pipe( gulpif( !isMaster, gulpif( !isProduction, gulp.run( 'watch-only' ) ) ) )
-		*/
+	
+	if(isProduction) {
+		gulp.run( 'production' )
+	} else if(isMaster) {
+		gulp.run( 'master' )
+	} else {
+		gulp.run( 'watch-only' )
+	}
+
 });

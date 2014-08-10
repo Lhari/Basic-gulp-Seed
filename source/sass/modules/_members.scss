@@ -1,0 +1,14 @@
+.side__members {
+	p.member {
+		color: $green-color;
+	}
+	p.officer {
+		color: $purple-color;
+	}
+	p.admin {
+		color: $orange-color;
+	}
+	p {
+		font-size: $font-small;
+	}
+}

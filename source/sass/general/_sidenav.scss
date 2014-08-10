@@ -1,0 +1,30 @@
+aside.left {
+	padding-top: 1%;
+	height:100%;
+	background: $base-color2;
+	display:table-cell;
+	margin-left:0;
+	color: $base-color1;
+	padding-right: 2%;
+	> div {
+		margin-bottom: $spacing;
+	}
+	.section-heading {
+		border-bottom: $border-width solid $blue-color;
+		margin-bottom: $spacing/1.5;
+	}
+
+}
+.side--hide {
+	text-transform: uppercase;
+	color: $input-text/1.5;
+	font-size: $font-xsmall;
+	margin: 4px 0;
+	cursor: pointer;
+	@extend .hover;
+
+	&:hover {
+		color: $blue-color;
+	}
+
+}

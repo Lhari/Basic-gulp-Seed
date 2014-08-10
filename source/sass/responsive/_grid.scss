@@ -1,0 +1,110 @@
+$grid-columns-total: 12;
+
+$lap-start: 681px;
+$desk-start: 960px;
+$desk-wide-start: 1200px;
+
+$palm-end: ($lap-start - 1px);
+$lap-end: ($desk-start - 1px);
+$desk-end: ($desk-wide-start - 1px);
+
+$breakpoints: 'palm', 'lap', 'lap-and-up', 'portable', 'desk', 'desk-wide';
+
+@mixin media($media) {
+  @if $media == 'palm' {
+    @media only screen and (max-width:$palm-end) { @content; }
+  }
+
+  @if $media == 'lap' {
+    @media only screen and (min-width:$lap-start) and (max-width:$lap-end) { @content; }
+  }
+
+  @if $media == 'lap-and-up' {
+    @media only screen and (min-width:$lap-start) { @content; }
+  }
+
+  @if $media == 'portable' {
+    @media only screen and (max-width:$lap-end) { @content; }
+  }
+
+  @if $media == 'desk'{
+    @media only screen and (min-width:$desk-start) { @content; }
+  }
+
+  @if $media == 'desk-wide'{
+    @media only screen and (min-width: $desk-wide-start) { @content; }
+  }
+
+  @if $media == 'below-desk-wide'{
+    @media only screen and (max-width: $desk-wide-start) { @content; }
+  }
+}
+
+
+@mixin grid-generate($namespace: '') {
+  @for $i from 1 through $grid-columns-total {
+    .size-#{$i}#{$namespace} {
+      width: ($i / $grid-columns-total) * 100%;
+    }
+  }
+
+  .clear#{$namespace} {
+    clear: both;
+  }
+}
+
+@include grid-generate();
+
+@each $breakpoint in $breakpoints {
+  @include media($breakpoint) {
+    @include grid-generate('--#{$breakpoint}');
+  }
+}
+
+@mixin clearfix() {
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+%clearfix {
+  @include clearfix;
+}
+
+.grid {
+  @extend %clearfix;
+  float: left;
+  transition: .3s width;
+  padding-left: $spacing/2;
+  padding-right: $spacing/2;
+}
+
+.grid--last {
+  @extend %clearfix;
+  float: right;
+}
+
+.grid-group {
+  @extend %clearfix;
+  margin-left: -$spacing/2;
+  margin-right: -$spacing/2;
+  float: none;
+}
+
+.grid-group--reverse {
+  > .grid {
+    float: right;
+  }
+}
+
+img.grid {
+  padding: 0!important;
+}
+
+@media only screen and (min-width: 681px) {
+  .mobile--hidden-above {
+    display:none!important;
+  }
+}

@@ -1,0 +1,52 @@
+// --- Font size
+
+$font-basic: 16px;
+
+$font-xsmall: $font-basic / 1.50;
+$font-small: $font-basic / 1.25;
+$font-normal: $font-basic;
+$font-large: $font-basic * 1.25;
+$font-xlarge: $font-basic * 1.50;
+$font-xxlarge: $font-basic * 1.75;
+$font-xxxlarge: $font-basic * 2;
+
+// --- Spacing, margin and padding vars
+
+$spacing: $font-basic * 1.38;
+$border-width: 0.15em;
+
+// --- Colors
+
+$shadow-color: #4c1c06;
+
+// --- Sizes
+
+// --- Images
+
+$slider-background: '../images/slider-background-sample.jpg';
+
+// --- Extendables
+
+.box-shadow {
+	box-shadow: 5px 0 15px $shadow-color;
+}
+
+.hover {
+	cursor: pointer;
+	transition: all 400ms ease;
+}
+
+.disable-hover {
+	cursor: default;
+}
+
+.headline {
+	text-transform: capitalize;
+	font-family: "Exo 2";
+}
+.bold {
+	font-weight: 600;
+}
+.align-center {
+	text-align: center;
+}
