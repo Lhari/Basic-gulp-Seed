@@ -113,7 +113,6 @@ gulp.task('master', function() {
 // ----- Manages everything, run gulp, gulp --mode master/production --message 'message' for correct output
 
 gulp.task('default', function() {
-	gulp.src( input+'/**/*.*' )
 	gulp.run('template');
 	gulp.run('styles');
 	gulp.run('js-top');
