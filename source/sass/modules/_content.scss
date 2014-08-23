@@ -1,11 +1,13 @@
 .content {
 	padding-top: $spacing/2;
-
+	img:before{
+		content: 'test';
+	}
 	.content__stats {
 		width: fit-content;
 		margin: 0 auto;
 	}
-	.content__stats--number {
+	.content__stats--number, .content__stats--current-streamer {
 		color: $base-color2;
 		padding: $spacing/4 0 $spacing/4 $spacing;
 		cursor: default;
@@ -14,5 +16,14 @@
 			padding-left: $spacing/3;
 			font-size: $font-large;
 		}
+	}
+	.content__stats--current-streamer {
+		i {
+			font-size: 18px;
+		}
+		span {
+			color: $puck-pink;
+		}
+		
 	}
 }

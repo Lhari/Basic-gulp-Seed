@@ -2,8 +2,8 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800);
 @font-face {
   font-family: 'fontello';
-  src: url('../font/fontello.eot?61094583');
-  src: url('../font/fontello.eot?61094583#iefix') format('embedded-opentype'), url('../font/fontello.woff?61094583') format('woff'), url('../font/fontello.ttf?61094583') format('truetype'), url('../font/fontello.svg?61094583#fontello') format('svg');
+  src: url('../font/fontello.eot?10285552');
+  src: url('../font/fontello.eot?10285552#iefix') format('embedded-opentype'), url('../font/fontello.woff?10285552') format('woff'), url('../font/fontello.ttf?10285552') format('truetype'), url('../font/fontello.svg?10285552#fontello') format('svg');
   font-weight: normal;
   font-style: normal; }
 
@@ -13,7 +13,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'fontello';
-    src: url('../font/fontello.svg?61094583#fontello') format('svg');
+    src: url('../font/fontello.svg?10285552#fontello') format('svg');
   }
 }
 */
@@ -85,6 +85,10 @@
   content: '\e80a'; }
 
 /* '' */
+.icon-microphone:before {
+  content: '\e80c'; }
+
+/* '' */
 .box-shadow {
   box-shadow: 5px 0 15px #4c1c06; }
 
@@ -480,16 +484,22 @@ img.grid {
 
 .content {
   padding-top: 11.04px; }
+  .content img:before {
+    content: 'test'; }
   .content .content__stats {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     margin: 0 auto; }
-  .content .content__stats--number {
+  .content .content__stats--number, .content .content__stats--current-streamer {
     color: #ffffff;
     padding: 5.52px 0 5.52px 22.08px;
     cursor: default; }
-    .content .content__stats--number span {
+    .content .content__stats--number span, .content .content__stats--current-streamer span {
       color: #61bfff;
       padding-left: 7.36px;
       font-size: 20px; }
+  .content .content__stats--current-streamer i {
+    font-size: 18px; }
+  .content .content__stats--current-streamer span {
+    color: #d06bcb; }
