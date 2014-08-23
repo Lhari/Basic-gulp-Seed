@@ -81,7 +81,10 @@ h3 {
 li {
 	list-style: none;
 }
-
+.first {
+	margin-left: 0!important;
+	padding-left: 0!important;
+}
 @media only screen and (max-width: 680px) {
 	.mobile--is-hidden {
 		display:none;
