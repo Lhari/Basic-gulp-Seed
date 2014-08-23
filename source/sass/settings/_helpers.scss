@@ -78,6 +78,10 @@ h3 {
 	color: $base-color1;
 }
 
+i {
+	text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
+}
+
 li {
 	list-style: none;
 }
@@ -111,4 +115,7 @@ a {
 		background: $puck-blue;
 		cursor: pointer;
 	}
+}
+%shadow {
+	text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 }

@@ -1,7 +1,8 @@
 .content {
 	padding-top: $spacing/2;
-	img:before{
-		content: 'test';
+
+	.content__stream {
+    	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 	}
 	.content__stats {
 		width: fit-content;
@@ -15,6 +16,7 @@
 			color: $puck-blue;
 			padding-left: $spacing/3;
 			font-size: $font-large;
+			@extend %shadow;
 		}
 	}
 	.content__stats--current-streamer {
