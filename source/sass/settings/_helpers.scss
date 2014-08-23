@@ -1,0 +1,111 @@
+
+
+body {
+	width: 100%;
+	background: $base-color1;
+	color: $base-color2;
+	font-family: 'Open Sans';
+}
+
+.wrapper {
+	margin: 0 auto;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.full-width {
+	width:100%;
+}
+
+.fixed-top {
+	position: fixed;
+	top: 0;
+	z-index: 99;
+}
+
+*:before, *:after, * {
+	box-sizing: border-box;
+}
+
+.right {
+	float:right;
+}
+.left {
+	float:left;
+}
+.is-hidden {
+	display:none;
+}
+.spacing-left {
+	margin-left: 8.33333%;
+}
+.row {
+	display: block;
+	margin-top: 0.5em;
+}
+
+
+div#content {
+
+	section {
+		height:100%;
+		display: table-cell;
+		background: $base-color1;
+	}
+}
+
+footer {
+	background: $base-color2;
+	height:100px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	padding: $spacing/4 $spacing/2;
+}
+
+h2 {
+	@extend .headline;
+	font-weight: 400;
+}
+
+h3 {
+	font-weight: 400;
+	@extend .headline;
+	font-size: $font-normal;
+	color: $base-color1;
+}
+
+li {
+	list-style: none;
+}
+
+@media only screen and (max-width: 680px) {
+	.mobile--is-hidden {
+		display:none;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+.align-center {
+	text-align: center;
+}
+%hover {
+	transition: all 500ms ease 0s;
+}
+
+%link {
+	color: $puck-blue;
+	@extend %hover;
+	padding: $spacing/4 $spacing/2;
+	display: block;
+	&:hover {
+		color: $base-color2;
+		background: $puck-blue;
+		cursor: pointer;
+	}
+}

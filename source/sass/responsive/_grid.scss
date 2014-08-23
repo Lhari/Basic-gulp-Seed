@@ -103,8 +103,16 @@ img.grid {
   padding: 0!important;
 }
 
+.max-width {
+  max-width: 1280px;
+}
 @media only screen and (min-width: 681px) {
-  .mobile--hidden-above {
+  .palm--hidden-above {
     display:none!important;
+  }
+}
+@media only screen and (max-width:$palm-end) {
+  .palm--is-hidden {
+    display: none!important;
   }
 }

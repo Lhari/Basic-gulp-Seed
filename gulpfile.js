@@ -19,7 +19,10 @@ var	gulp 		= 		require('gulp'),
 	uglify 		= 		require('gulp-uglify'),
 	concat		=		require('gulp-concat'),
 	prefix 		= 		require('gulp-autoprefixer'),
-	jade 		= 		require('gulp-jade');
+	jade 		= 		require('gulp-jade'),
+	rename 		= 		require("gulp-rename"),
+	ignore 		= 		require('gulp-ignore'),
+	ext 		= 		require('gulp-ext-replace');
 
 var isMaster = args.mode === 'master';
 var isProduction = args.mode === 'production';
@@ -35,7 +38,9 @@ var output = 'assets';
 // ----- Task handling SCSS compile, depending on mode, file will either be minified or extended
 
 gulp.task('styles', function() {
+	gulp.run('iconfont-converter')
 	gulp.src( input+'/sass/**/*.scss' )
+
 		.pipe( changed( input+'/sass/**' ) )
 		.pipe( sass( { style: 'expanded' } ) )
 		.pipe( prefix() )
@@ -43,6 +48,12 @@ gulp.task('styles', function() {
 		.pipe( gulp.dest( output+'/css' ) )
 });
 
+gulp.task('iconfont-converter', function() {
+	gulp.src(input+'/sass/assets/fontello.css')
+		.pipe(rename('_fontello.css'))
+		.pipe(ext('.scss'))
+		.pipe(gulp.dest(input+'/sass/assets/'))
+})
 // ----- Task handling javascript file for top-loading on a site
 
 gulp.task('js-top', function() {
@@ -59,9 +70,9 @@ gulp.task('js-top', function() {
 
 gulp.task('js-bottom', function() {
 	gulp.src([
-			'bower_components/jquery/jquery.js',
+			'bower_components/jquery/dist/jquery.js',
 			'bower_components/blazy/blazy.js',
-			'source/js/partials/*.js'
+			'source/js/*.js'
 			])
 		.pipe( changed( input+'/js/**' ) )
 		.pipe( concat( 'all.bottom.js' ) )
@@ -82,7 +93,7 @@ gulp.task('template', function() {
 // ----- Watch task to make sure scripts gets run on local development
 
 gulp.task('watch-only', function() {
-	gulp.watch( input+'/template/*.jade', ['template'] );
+	gulp.watch( input+'/template/**/*.jade', ['template'] );
 	gulp.watch( input+'/sass/**/*.scss', ['styles'] );
 	gulp.watch( input+'/js/**/*.js', ['js-bottom'] );
 });
@@ -90,8 +101,8 @@ gulp.task('watch-only', function() {
 // ----- Pushes to development branch on github
 
 gulp.task('production', function() {
-	return gulp.src('')
-		//.pipe( git.checkout( 'dev' ) )
+	return gulp.src('/')
+		.pipe( git.checkout( 'dev', {args: '-b'} ) )
 		.pipe( git.add() )
 		.pipe( git.commit( message ) )
 		.pipe( git.push() )
@@ -102,7 +113,7 @@ gulp.task('production', function() {
 
 gulp.task('master', function() {
 	return gulp.src('')
-		//.pipe( git.checkout( 'master', {args: '-b'} ) )
+		.pipe( git.checkout( 'master', {args: '-b'} ) )
 		.pipe( git.add() )
 		.pipe( git.commit( message ) )
 		.pipe( git.push() )

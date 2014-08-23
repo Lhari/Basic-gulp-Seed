@@ -1,0 +1,18 @@
+.content {
+	padding-top: $spacing/2;
+
+	.content__stats {
+		width: fit-content;
+		margin: 0 auto;
+	}
+	.content__stats--number {
+		color: $base-color2;
+		padding: $spacing/4 0 $spacing/4 $spacing;
+		cursor: default;
+		span {
+			color: $puck-blue;
+			padding-left: $spacing/3;
+			font-size: $font-large;
+		}
+	}
+}

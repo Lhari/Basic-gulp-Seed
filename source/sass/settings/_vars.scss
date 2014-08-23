@@ -18,12 +18,15 @@ $border-width: 0.15em;
 // --- Colors
 
 $shadow-color: #4c1c06;
+$base-color1: #353535;
+$base-color2: #ffffff;
+$puck-blue: #61bfff;
+$puck-pink: #d06bcb;
+$background-color: #333333;
 
 // --- Sizes
 
 // --- Images
-
-$slider-background: '../images/slider-background-sample.jpg';
 
 // --- Extendables
 
@@ -43,6 +46,7 @@ $slider-background: '../images/slider-background-sample.jpg';
 .headline {
 	text-transform: capitalize;
 	font-family: "Exo 2";
+
 }
 .bold {
 	font-weight: 600;
