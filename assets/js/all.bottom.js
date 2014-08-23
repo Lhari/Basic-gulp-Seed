@@ -9425,5 +9425,6 @@ $(document).ready(function() {
 	$('.infobox').hide();
 	$('.js-menu-toggle').click(function() {
 		$('.js-menu').slideToggle();
+		$('.js-menu-toggle').toggleClass('active');
 	})
 })

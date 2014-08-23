@@ -7,8 +7,15 @@
 		height:100%;
 		cursor: pointer;
 		font-size: $font-large;
-		@extend %link;
+		color: $puck-blue;
 		padding: 0 $spacing/2;
+		transition: all 500ms ease;
+		&:hover {
+			color: $puck-pink;
+		}
+		&.active {
+			color: $puck-pink;
+		}
 		.icon-dots:before {
 		    margin-top: 18px !important;
 		}

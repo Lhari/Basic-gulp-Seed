@@ -191,15 +191,15 @@ a {
 .align-center {
   text-align: center; }
 
-.menu .menu__mobile--toggle, .menu li a {
+.menu li a {
   -webkit-transition: all 500ms ease 0s;
           transition: all 500ms ease 0s; }
 
-.menu .menu__mobile--toggle, .menu li a {
+.menu li a {
   color: #61bfff;
   padding: 5.52px 11.04px;
   display: block; }
-  .menu .menu__mobile--toggle:hover, .menu li a:hover {
+  .menu li a:hover {
     color: #ffffff;
     background: #61bfff;
     cursor: pointer; }
@@ -459,7 +459,14 @@ img.grid {
     height: 100%;
     cursor: pointer;
     font-size: 20px;
-    padding: 0 11.04px; }
+    color: #61bfff;
+    padding: 0 11.04px;
+    -webkit-transition: all 500ms ease;
+            transition: all 500ms ease; }
+    .menu .menu__mobile--toggle:hover {
+      color: #d06bcb; }
+    .menu .menu__mobile--toggle.active {
+      color: #d06bcb; }
     .menu .menu__mobile--toggle .icon-dots:before {
       margin-top: 18px !important; }
   .menu .menu__mobile {
