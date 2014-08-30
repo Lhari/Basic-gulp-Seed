@@ -136,10 +136,10 @@ body {
        box-sizing: border-box; }
 
 .right {
-  float: right; }
+  float: right !important; }
 
 .left {
-  float: left; }
+  float: left !important; }
 
 .is-hidden {
   display: none; }
@@ -519,3 +519,21 @@ img.grid {
     font-size: 18px; }
   .content .content__stats--current-streamer span {
     color: #d06bcb; }
+
+.square {
+  height: 0;
+  padding-bottom: 100% !important; }
+
+.rectangle {
+  height: 0;
+  padding-bottom: calc(50% - 22px / 2) !important; }
+
+.block {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 22.08px;
+  overflow: hidden;
+  padding: 0 11.04px;
+  position: relative; }

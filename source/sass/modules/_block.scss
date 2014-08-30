@@ -1,0 +1,19 @@
+.square {
+	height: 0;
+	padding-bottom: 100% !important;
+}
+.rectangle {
+    height: 0;
+    padding-bottom: calc(50% - 22px / 2) !important;
+}
+
+.block {
+	background-color: rgba(0, 0, 0, 0.5);
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: $spacing;
+    overflow: hidden;
+    padding: 0 $spacing/2;
+    position: relative;
+}
