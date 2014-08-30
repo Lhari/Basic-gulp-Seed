@@ -58,6 +58,7 @@ gulp.task('iconfont-converter', function() {
 
 gulp.task('js-top', function() {
 	gulp.src([
+			'bower_components/angular/angular.min.js',
 			'bower_components/modernizr/modernizr.js',
 			'bower_components/respond/src/respond.js'
 			])
@@ -72,12 +73,19 @@ gulp.task('js-bottom', function() {
 	gulp.src([
 			'bower_components/jquery/dist/jquery.js',
 			'bower_components/blazy/blazy.js',
+			'source/angular/*.js',
+			'source/controllers/*.js',
 			'source/js/*.js'
 			])
 		.pipe( changed( input+'/js/**' ) )
 		.pipe( concat( 'all.bottom.js' ) )
 		.pipe( gulpif ( isMaster, uglify() ) )
 		.pipe( gulp.dest( output+'/js' ) )
+});
+
+gulp.task('js', function() {
+	gulp.run('js-top');
+	gulp.run('js-bottom');
 });
 
 // ----- Task handling for compiling jade files for template generation

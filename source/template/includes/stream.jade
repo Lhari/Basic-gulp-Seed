@@ -1,0 +1,10 @@
+div.content.grid.size-9.size-12--palm.size-10--desk-wide(data-ng-controller="streamerController")
+	img.content__stream.grid.size-12.b-lazy(src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' data-src='./assets/images/stream-screen.png')
+	div.content__stats(data-ng-repeat="x in streamer" data-ng-if="x.Streamer == 'James'")
+		span.content__stats--current-streamer.first.icon-microphone
+			span {{ x.Streamer }}
+		span.content__stats--number.align-center.icon-users
+			span {{ x.Viewers }}
+		span.content__stats--number.align-center.icon-desktop
+			span {{ x.Fps }}
+

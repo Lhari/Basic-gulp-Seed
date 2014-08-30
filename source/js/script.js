@@ -1,3 +1,8 @@
+;(function() {
+    // Initialize
+	var bLazy = new Blazy();
+})();
+
 $(document).ready(function() {
 	$('.js-menu').hide();
 	$('.infobox').hide();

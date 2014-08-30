@@ -1,32 +1,23 @@
-div.menu.grid.size-3.size-12--palm.size-2--desk-wide
+div.menu.grid.size-3.size-12--palm.size-2--desk-wide(data-ng-controller="streamerController")
 	h1.grid.size-12.size-5--palm Puck
 		label.palm--is-hidden Premium streaming service
-	a.menu__mobile--toggle.js-menu-toggle.right.palm--hidden-above
-		i.icon-dots
-	ul.palm--hidden-above.js-menu.menu__mobile.grid.size-10--palm
-		li
-			h3 James
-		li 
-			a Flash
-		li.menu__last-from-group
-			a Html5
-		li
-			h3 Kasper
-		li 
-			a Flash
-		li.menu__last-from-group
-			a Html5
 
-	ul.palm--is-hidden
+	a.menu__mobile--toggle.js-menu-toggle.right.palm--hidden-above.icon-dots
+
+	div.palm--hidden-above.js-menu.menu__mobile.grid.size-10--palm
+		ul(data-ng-repeat="x in streamer")
+			li
+				h3 {{ x.Streamer }}
+			li 
+				a Flash
+			li.menu__last-from-group
+				a Html5
+
+	ul.palm--is-hidden(data-ng-repeat="x in streamer")
 		li
-			h3 James
-		li 
+			h3 {{ x.Streamer }}
+		li
 			a Flash
 		li.menu__last-from-group
 			a Html5
 		li
-			h3 Kasper
-		li 
-			a Flash
-		li.menu__last-from-group
-			a Html5
