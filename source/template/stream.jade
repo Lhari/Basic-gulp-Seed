@@ -4,8 +4,11 @@ html(data-ng-app="")
       title Default title
       include includes/head
   body
-    div.max-width.wrapper
+    div.on-canvas.js-oncanvas
         include includes/header
-        include includes/stream
+        div.oncanvas__inner  
+            include includes/stream
+        div.js-toggle-offcanvas.oncanvas__overlay
+    div.offcanvas.js-offcanvas.closed
         include includes/menu
     include includes/absolute-footer
