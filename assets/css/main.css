@@ -454,7 +454,8 @@ img.grid {
 .menu {
   height: 100vh;
   background: #252525;
-  position: relative; }
+  position: relative;
+  height: 3.5em; }
   .menu .menu__mobile--toggle {
     height: 100%;
     cursor: pointer;
@@ -462,7 +463,8 @@ img.grid {
     color: #61bfff;
     padding: 0 11.04px;
     -webkit-transition: all 500ms ease;
-            transition: all 500ms ease; }
+            transition: all 500ms ease;
+    line-height: 54px; }
     .menu .menu__mobile--toggle:hover {
       color: #d06bcb; }
     .menu .menu__mobile--toggle.active {
@@ -473,13 +475,14 @@ img.grid {
     background: #252525;
     position: absolute;
     top: 3.5em;
-    right: 0; }
-  .menu h1 {
+    right: 0;
+    z-index: 100; }
+  .menu h1, .menu h1 a {
     font-weight: lighter;
     text-transform: uppercase;
     color: #d06bcb;
     vertical-align: middle; }
-    .menu h1 label {
+    .menu h1 label, .menu h1 a label {
       display: block;
       font-size: 10.66667px;
       margin-top: -7px;
@@ -492,10 +495,6 @@ img.grid {
     opacity: 0.6;
     font-weight: lighter;
     font-size: 20px; }
-
-@media only screen and (max-width: 680px) {
-  .menu {
-    height: 3.5em; } }
 
 .content {
   padding-top: 11.04px; }

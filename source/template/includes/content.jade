@@ -1,7 +1,9 @@
-div.content.grid.size-9.size-12--palm.size-10--desk-wide
+div.content.grid.size-12(data-ng-controller="frontpageController")
+	//span(data-ng-repeat="x in frontpage")
+		span {{ x.ImageName + '.' + x.fileExt }}
 	div.grid-group
 		div.grid.size-6.size-8--lap.size-12--palm
-			div.block.square.b-lazy(data-src="assets/images/luna-death.jpg")
+			div.block.square.b-lazy(data-src="assets/images/luna-death.jpg") 
 
 		div.grid.size-6.size-4--lap.size-12--palm
 			div.grid-group

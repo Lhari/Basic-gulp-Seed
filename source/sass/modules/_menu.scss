@@ -2,6 +2,7 @@
 	height: 100vh;
 	background: $base-color1*0.7;
 	position: relative;
+	height: 3.5em;
 
 	.menu__mobile--toggle {
 		height:100%;
@@ -10,6 +11,7 @@
 		color: $puck-blue;
 		padding: 0 $spacing/2;
 		transition: all 500ms ease;
+		line-height: 54px;
 		&:hover {
 			color: $puck-pink;
 		}
@@ -28,8 +30,9 @@
 		position: absolute;
 		top: 3.5em;
 		right: 0;
+		z-index: 100;
 	}
-	h1 {
+	h1, h1 a {
 		font-weight: lighter;
 		text-transform: uppercase;
 		color: $puck-pink;
@@ -59,11 +62,5 @@
 		a {
 			@extend %link;
 		}
-	}
-}
-
-@media only screen and (max-width:$palm-end) {
-	.menu {
-		height: 3.5em;
 	}
 }

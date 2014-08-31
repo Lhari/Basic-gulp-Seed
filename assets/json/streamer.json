@@ -1,7 +1,7 @@
 [
 {
 "Streamer" : "James",
-"Viewers" : "5",
+"Viewers" : "4",
 "Fps" : "30"
 },
 {
@@ -11,6 +11,11 @@
 },
 {
 "Streamer" : "Oliver",
+"Viewers" : "2",
+"Fps" : "24"
+},
+{
+"Streamer" : "Caroline",
 "Viewers" : "2",
 "Fps" : "24"
 }
