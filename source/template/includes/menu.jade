@@ -1,10 +1,5 @@
-div.menu.grid.size-12(data-ng-controller="StreamerController")
-	h1.grid.size-5 
-		a(href="/") Puck
-	
-	a.menu__mobile--toggle.js-menu-toggle.right.icon-dots
-
-	div.js-menu.menu__mobile.grid.size-6.size-10--palm
+div.offcanvas__inner
+	div.offcanvas__content(data-ng-controller="StreamerController")
 		ul(data-ng-repeat="x in streamer")
 			li
 				h3 {{ x.Streamer }}

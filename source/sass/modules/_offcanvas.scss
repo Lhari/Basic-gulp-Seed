@@ -1,0 +1,49 @@
+.site {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+}
+.on-canvas {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	transform: translateX(0);
+	box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.75);
+	transition: all 300ms ease;
+	background: $base-color1;
+}
+.on-canvas, .on-canvas__overlay {
+	z-index: 1000;
+}
+.offcanvas {
+	width: $offcanvasWidth;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	transition: all 300ms ease;
+}
+
+.offcanvas__inner {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    padding: $spacing;
+}
+.on-canvas.show-nav {
+	transform: translateX(-$offcanvasWidth);
+}
+
+.oncanvas__overlay {
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &.active {
+    	display: block;
+    }
+}

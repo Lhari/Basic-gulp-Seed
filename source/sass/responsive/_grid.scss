@@ -115,4 +115,10 @@ img.grid {
   .palm--is-hidden {
     display: none!important;
   }
+  .on-canvas.show-nav {
+    transform: translateX(-$offcanvasWidth-mobile) !important;
+  }
+  .offcanvas {
+    width: $offcanvasWidth-mobile !important;
+  }
 }
