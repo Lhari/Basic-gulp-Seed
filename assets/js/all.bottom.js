@@ -9422,18 +9422,18 @@ return jQuery;
 
 var puckWebApp = angular.module('myModule', []);
 puckWebApp.controller('StreamerController', StreamerController);
-
+puckWebApp.controller('frontpageController', frontpageController);
 
 function StreamerController ($scope, $timeout, $http) {
     
     var timer;
 
-       function myLoop(){
+       function myLoop() {
            
             $http.get('./assets/json/streamer.json')
             .success(function(response) {$scope.streamer = response;});
 
-                    timer = $timeout(
+                    timer = $timeout (
                         function() { 
                             console.log( "Timeout executed", Date.now() ); 
                         },
@@ -9463,22 +9463,12 @@ function StreamerController ($scope, $timeout, $http) {
     
 };
 
-puckWebApp.$inject = ['$scope','$timeout'];
-
-angular.module('frontpageControllerTest', [])
-  .controller('frontpageController', frontpageController);
-
 function frontpageController($scope,$http) {
     $http.get('./assets/json/frontpage.json')
     .success(function(response) {$scope.frontpage = response;});
 }
-/*angular.module('streamControllerTest', [])
-  .controller('streamerController', streamerController);
 
-function streamerController($scope,$http) {
-	$http.get('./assets/json/streamer.json')
-    .success(function(response) {$scope.streamer = response;});
-}*/
+puckWebApp.$inject = ['$scope','$timeout'];
 
 ;(function() {
     // Initialize

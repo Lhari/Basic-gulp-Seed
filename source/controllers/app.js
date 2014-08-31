@@ -1,17 +1,17 @@
 var puckWebApp = angular.module('myModule', []);
 puckWebApp.controller('StreamerController', StreamerController);
-
+puckWebApp.controller('frontpageController', frontpageController);
 
 function StreamerController ($scope, $timeout, $http) {
     
     var timer;
 
-       function myLoop(){
+       function myLoop() {
            
             $http.get('./assets/json/streamer.json')
             .success(function(response) {$scope.streamer = response;});
 
-                    timer = $timeout(
+                    timer = $timeout (
                         function() { 
                             console.log( "Timeout executed", Date.now() ); 
                         },
@@ -40,5 +40,10 @@ function StreamerController ($scope, $timeout, $http) {
                     );
     
 };
+
+function frontpageController($scope,$http) {
+    $http.get('./assets/json/frontpage.json')
+    .success(function(response) {$scope.frontpage = response;});
+}
 
 puckWebApp.$inject = ['$scope','$timeout'];
