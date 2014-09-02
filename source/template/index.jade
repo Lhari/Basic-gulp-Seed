@@ -1,14 +1,8 @@
-doctype html
-html(data-ng-app="")
-  head
-      title Default title
-      include includes/head
-  body
-    div.on-canvas.js-oncanvas
-        include includes/header
-        div.oncanvas__inner  
-            include includes/content
-        div.js-toggle-offcanvas.oncanvas__overlay
-    div.offcanvas.js-offcanvas.closed
-        include includes/menu
-    include includes/absolute-footer
+extend includes/layout
+
+block title
+	title
+		| Pucktacular!
+
+block content
+	include includes/content

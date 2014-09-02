@@ -6,7 +6,7 @@
 */
 
 var	gulp 		= 		require('gulp'),
-	git			=		require('gulp-git'),
+//	git			=		require('gulp-git'),
 	args		=		require('yargs').argv,
 	gulpif 		=		require('gulp-if'),
 	sass 		= 		require('gulp-sass'),
@@ -22,6 +22,7 @@ var	gulp 		= 		require('gulp'),
 	jade 		= 		require('gulp-jade'),
 	rename 		= 		require("gulp-rename"),
 	ignore 		= 		require('gulp-ignore'),
+	annotate	=		require('gulp-ng-annotate'),
 	ext 		= 		require('gulp-ext-replace');
 
 var isMaster = args.mode === 'master';
@@ -34,11 +35,20 @@ var message = args.message;
 
 var input = 'source';
 var output = 'assets';
+var bower = 'bower_components';
+
+// ----- Compiling fontello fonts to the correct placement
+
+gulp.task('iconfont-converter', function() {
+	gulp.src(input+'/sass/assets/fontello.css')
+		.pipe(rename('_fontello.css'))
+		.pipe(ext('.scss'))
+		.pipe(gulp.dest(input+'/sass/assets/'))
+})
 
 // ----- Task handling SCSS compile, depending on mode, file will either be minified or extended
 
-gulp.task('styles', function() {
-	gulp.run('iconfont-converter')
+gulp.task('styles',['iconfont-converter'] , function() {
 	gulp.src( input+'/sass/**/*.scss' )
 
 		.pipe( changed( input+'/sass/**' ) )
@@ -48,19 +58,13 @@ gulp.task('styles', function() {
 		.pipe( gulp.dest( output+'/css' ) )
 });
 
-gulp.task('iconfont-converter', function() {
-	gulp.src(input+'/sass/assets/fontello.css')
-		.pipe(rename('_fontello.css'))
-		.pipe(ext('.scss'))
-		.pipe(gulp.dest(input+'/sass/assets/'))
-})
 // ----- Task handling javascript file for top-loading on a site
 
 gulp.task('js-top', function() {
 	gulp.src([
-			'bower_components/angular/angular.min.js',
-			'bower_components/modernizr/modernizr.js',
-			'bower_components/respond/src/respond.js'
+			bower+'/angular/angular.min.js',
+			bower+'/modernizr/modernizr.js',
+			bower+'/respond/src/respond.js'
 			])
 		.pipe( concat( 'all.top.js' ) )
 		.pipe( gulpif (isMaster, uglify() ) )
@@ -71,21 +75,44 @@ gulp.task('js-top', function() {
 
 gulp.task('js-bottom', function() {
 	gulp.src([
-			'bower_components/jquery/dist/jquery.js',
-			'bower_components/blazy/blazy.js',
-			'source/angular/*.js',
-			'source/controllers/*.js',
-			'source/js/*.js'
+			bower+'/jquery/dist/jquery.js',
+			bower+'/blazy/blazy.js',
+			input+'/angular/*.js',
+			input+'/js/*.js'
 			])
 		.pipe( changed( input+'/js/**' ) )
-		.pipe( concat( 'all.bottom.js' ) )
-		.pipe( gulpif ( isMaster, uglify() ) )
+		.pipe( concat( 'all.bottom.precompile.js' ) )
+		
 		.pipe( gulp.dest( output+'/js' ) )
 });
 
+// ----- Specific angular compiler for minifying and fixing Angular to look right
+
+gulp.task('angularControllers', function() {
+	gulp.src('source/controllers/*.js')
+	.pipe( changed( input+'/controllers/**' ) )
+	.pipe( concat( 'controllers.js' ) )
+	.pipe( annotate() )
+	.pipe(gulp.dest( output+'/js' ))
+})
+
+// ----- Compiling Angular and js-bottom into 1 file for less requests
+
+gulp.task('compile-bottom-js', ['angularControllers', 'js-bottom'], function() {
+	gulp.src([
+			output+'/js/all.bottom.precompile.js',
+			output+'/js/controllers.js'
+		])
+	.pipe( concat( 'all.bottom.js' ) )
+	.pipe( gulpif ( isMaster, uglify() ) )
+	.pipe( gulp.dest( output+'/js') )
+})
+
+// ----- Bringing it all together!
+
 gulp.task('js', function() {
 	gulp.run('js-top');
-	gulp.run('js-bottom');
+	gulp.run('compile-bottom-js');
 });
 
 // ----- Task handling for compiling jade files for template generation
@@ -107,7 +134,7 @@ gulp.task('watch-only', function() {
 });
 
 // ----- Pushes to development branch on github
-
+/*
 gulp.task('production', function() {
 	return gulp.src('/')
 		.pipe( git.checkout( 'dev', {args: '-b'} ) )
@@ -128,21 +155,22 @@ gulp.task('master', function() {
 		.pipe( notify( 'Files pushed to master branch of Github with the title: '+message ) )
 		.pipe( notify( 'Version number: 1.0.0' ) )
 });
-
+*/
 // ----- Manages everything, run gulp, gulp --mode master/production --message 'message' for correct output
 
 gulp.task('default', function() {
 	gulp.src( input+'/**/*.*' )
 	gulp.run('template');
 	gulp.run('styles');
-	gulp.run('js-top');
-	gulp.run('js-bottom');
+	gulp.run('js');
 
+	/*
 	if(isProduction) {
 		gulp.run( 'production' )
 	} else if(isMaster) {
 		gulp.run( 'master' )
 	} else {
-		gulp.run( 'watch-only' )
-	}
+	*/
+	gulp.run( 'watch-only' )
+	//}
 });
