@@ -1,8 +1,8 @@
 var puckWebApp = angular.module('myModule', []);
-puckWebApp.controller('StreamerController', ['$scope $timeout $http', StreamerController]);
-puckWebApp.controller('frontpageController', ['$scope $http', frontpageController]);
+puckWebApp.controller('streamCntrl', streamCntrl);
+puckWebApp.controller('fpCntrl', fpCntrl);
 
-function StreamerController () {
+function streamCntrl ($scope, $timeout, $http) {
     
     var timer;
 
@@ -39,11 +39,11 @@ function StreamerController () {
                         }
                     );
     
-};
-
-function frontpageController() {
-    $http.get('./assets/json/frontpage.json')
-    .success(function(response) {$scope.frontpage = response;});
 }
+streamCntrl.$inject = ["$scope", "$timeout", "$http"];;
 
-puckWebApp.$inject = ['$scope','$timeout'];
+function fpCntrl($scope, $http) {
+    $http.get('./assets/json/frontpage.json')
+    .success(function(data) {$scope.frontpage = data;});
+}
+fpCntrl.$inject = ["$scope", "$http"];
