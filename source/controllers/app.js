@@ -6,39 +6,37 @@ function streamCntrl ($scope, $timeout, $http) {
     
     var timer;
 
-       function myLoop() {
-           
-            $http.get('./assets/json/streamer.json')
-            .success(function(response) {$scope.streamer = response;});
+   function myLoop() {
+       
+        $http.get('./assets/json/streamer.json')
+        .success(function(response) {
+            $scope.streamer = response;
+        });
 
-                    timer = $timeout (
-                        function() { 
-                            console.log( "Timeout executed", Date.now() ); 
-                        },
-                        3000
-                    );
-  
-                    
-                    timer.then(
-                        function() { 
-                            myLoop();
- 
-                        },
-                        function() { 
-                            console.log( "Failed collecting Data, check JSON" ); 
-                        }
-                    );
+        timer = $timeout (
+            function() { 
+                console.log( "Timeout executed", Date.now() ); 
+            }, 3000
+        );
+
+                
+        timer.then(
+            function() { 
+                 myLoop();
+             }, function() { 
+                    console.log( "Failed collecting Data, check JSON" ); 
                 }
+        );
+    }
 
-                myLoop();
+    myLoop();
 
-                    $scope.$on(
-                        "$destroy",
-                        function( event ) { 
-                            $timeout.cancel( timer ); 
-                        }
-                    );
-    
+    $scope.$on(
+        "$destroy",
+        function( event ) { 
+            $timeout.cancel( timer ); 
+        }
+    );
 };
 
 function fpCntrl($scope, $http) {

@@ -1,9 +1,5 @@
 div.offcanvas__inner
 	div.offcanvas__content(data-ng-controller="streamCntrl")
-		ul(data-ng-repeat="x in streamer")
-			li
-				h3 {{ x.Streamer }}
-			li 
-				a Flash
-			li.menu__last-from-group
-				a Html5
+		ul
+			li(data-ng-repeat="x in streamer")
+				a(href="./streamer.html?user={{ x.Streamer }}") {{ x.Streamer }}
