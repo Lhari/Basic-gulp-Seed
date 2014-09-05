@@ -9644,82 +9644,60 @@ function GetQueryStringParams(sParam) {
 };
 var puckWebApp = angular.module('myModule', []);
 puckWebApp.controller('streamCntrl', streamCntrl);
-puckWebApp.controller('currentStreamCntrl', currentStreamCntrl);
 puckWebApp.controller('fpCntrl', fpCntrl);
 
-function streamCntrl ($scope, $timeout, $http) {
+function streamCntrl ($scope, $timeout, $http, $location) {
+    console.log('Current user: ' + $location.search().user);
     
     var timer;
+    var refresh;
 
-       function myLoop() {
-           
+   function myLoop() {
+            
             $http.get('./assets/json/streamer.json')
-            .success(function(response) {$scope.streamer = response;});
+            .success(function(response) {
+                $scope.streamer = response;
+            });
 
-                    timer = $timeout (
-                        function() { 
-                            console.log( "Timeout executed", Date.now() ); 
-                        },
-                        3000
-                    );
-  
-                    
-                    timer.then(
-                        function() { 
-                            myLoop();
- 
-                        },
-                        function() { 
-                            console.log( "Failed collecting Data, check JSON" ); 
-                        }
-                    );
-                }
-
-                myLoop();
-
-                    $scope.$on(
-                        "$destroy",
-                        function( event ) { 
-                            $timeout.cancel( timer ); 
-                        }
-                    );
-    
-}
-streamCntrl.$inject = ["$scope", "$timeout", "$http"];;
-
-var streamerName = 'James';
-
-function currentStreamCntrl ($scope, $timeout, $http) { 
-    var timer;
-       function myLoop() {
-            $http({
-                url: './assets/json/streamer.json',
-                method: "GET",
-                params: {Streamer: streamerName}
-            })
-            .success(function(response) {$scope.streamer = response;});
-            timer = $timeout (
-                function() { 
-                    console.log( "Timeout executed", Date.now() ); 
-                }, 3000
-            );
-  
-            timer.then(
-                function() { 
-                    myLoop();
-                }, function() { 
+        timer = $timeout (
+            function() { 
+                console.log( "Timeout executed", Date.now() ); 
+            }, 3000
+        );
+        
+        timer.then(
+            function() { 
+                 myLoop();
+                 refresher();
+             }, function() { 
                     console.log( "Failed collecting Data, check JSON" ); 
-                    }
+                }
+        );
+    }
+
+    function refresher() {
+        $scope.currentUser = $location.search().user;
+        refresh = $timeout (
+            function() {300}
             );
+        refresh.then(
+            function() {
+                refresher();
+            }, function() {
+                console.log( "User not refreshed" );
+            })
+    }
+    myLoop();
+    refresher();
+
+    $scope.$on(
+        "$destroy",
+        function( event ) { 
+            $timeout.cancel( timer ); 
         }
-        myLoop();
-        $scope.$on(
-            "$destroy", function( event ) { 
-                            $timeout.cancel( timer ); 
-                        }
-        ); 
+    );
 }
-currentStreamCntrl.$inject = ["$scope", "$timeout", "$http"];;
+streamCntrl.$inject = ["$scope", "$timeout", "$http", "$location"];;
 
 function fpCntrl($scope, $http) {
     $http.get('./assets/json/frontpage.json')

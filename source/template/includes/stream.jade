@@ -1,6 +1,6 @@
 div.content.grid.size-12(data-ng-controller="streamCntrl")
 	video#videoplayer.video-js.vjs-default-skin.content__stream.grid.size-12(controls="true" autoplay="true" data-setup="{}" width="auto" height="auto")
-	div.content__stats(data-ng-repeat="x in streamer" data-ng-if="x.Streamer == 'James'")
+	div.content__stats(data-ng-repeat="x in streamer" data-ng-if="x.Streamer == currentUser")
 		span.content__stats--current-streamer.first.icon-microphone
 			span {{ x.Streamer }}
 		span.content__stats--number.align-center.icon-users

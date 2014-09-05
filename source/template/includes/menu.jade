@@ -2,4 +2,4 @@ div.offcanvas__inner
 	div.offcanvas__content(data-ng-controller="streamCntrl")
 		ul
 			li(data-ng-repeat="x in streamer")
-				a(href="./streamer.html?user={{ x.Streamer }}") {{ x.Streamer }}
+				a(href="./stream.html#?user={{ x.Streamer }}" data-ng-click="refresher()") {{ x.Streamer }}
