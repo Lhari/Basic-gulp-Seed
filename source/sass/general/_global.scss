@@ -134,3 +134,14 @@ a.dark {
 a {
 	text-decoration: none;
 }
+
+.error {
+	background: rgba(200, 72, 74, 0.61);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    bottom: 0;
+    display: block;
+    padding: 6px;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}

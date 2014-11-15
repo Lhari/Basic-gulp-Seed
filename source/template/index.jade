@@ -1,8 +1,16 @@
-extend includes/layout
+doctype html
+html(id="page" data-ng-app="puckWebApp")
+	head
 
-block title
-	title
-		| Pucktacular!
+		include includes/head
 
-block content
-	include includes/content
+	body(ng-controller="mainCtrl")
+		div.on-canvas.js-oncanvas
+			include includes/header
+			div.oncanvas__inner  
+				div.content.ng-view
+				div(ng-if="error" class="error") {{ 'Data stream has failed, if this continues, please contact an admin' }}
+		div.js-toggle-offcanvas.oncanvas__overlay
+		div.offcanvas.js-offcanvas.closed
+			include includes/menu
+		include includes/absolute-footer

@@ -1,7 +1,8 @@
 /*
 * Advanced gulp task manager
-* Allows minifaction of files depending on argument
-* Use --mode min to minify
+* Handles Angular, Javascript, jade and SCSS
+* Please maintain the structural suggestions from within the package
+* Use --mode min to create a minified version of your code
 */
 
 var	gulp 		= 		require('gulp'),
@@ -9,9 +10,6 @@ var	gulp 		= 		require('gulp'),
 	gulpif 		=		require('gulp-if'),
 	sass 		= 		require('gulp-sass'),
 	minifycss 	= 		require('gulp-minify-css'),
-	run			=		require('gulp-run'),
-	notify		=		require('gulp-notify'),
-	rename 		= 		require('gulp-rename'),
 	changed 	= 		require('gulp-changed'),
 	watch 		= 		require('gulp-watch'),
 	uglify 		= 		require('gulp-uglify'),
@@ -20,20 +18,29 @@ var	gulp 		= 		require('gulp'),
 	jade 		= 		require('gulp-jade'),
 	rename 		= 		require("gulp-rename"),
 	ignore 		= 		require('gulp-ignore'),
-	annotate	=		require('gulp-ng-annotate'),
 	ext 		= 		require('gulp-ext-replace');
 
-// ----- Decide the minifaction name
+var ismin = args.mode === 'min';
 
-var isMin = args.mode === 'min';
+/*
+* Set input and output from gulpfile
+*/
 
-// ----- Set input and output from gulpfile
+var input = './source';
+var output = './assets';
 
-var input = 'source';
-var output = 'assets';
-var bower = 'bower_components';
+// ----- Task handling SCSS compile, depending on mode, file will either be minified or extended
 
-// ----- Compiling fontello fonts to the correct placement
+gulp.task('styles', ['iconfont-converter'], function() {
+
+	gulp.src( input+'/sass/**/*.scss' )
+
+		.pipe( changed( input+'/sass/**' ) )
+		.pipe( sass( { style: 'expanded' } ) )
+		.pipe( prefix() )
+		.pipe( gulpif( ismin, minifycss( { keepBreaks: false } ) ) )
+		.pipe( gulp.dest( output+'/css' ) )
+});
 
 gulp.task('iconfont-converter', function() {
 	gulp.src(input+'/sass/assets/fontello.css')
@@ -41,79 +48,56 @@ gulp.task('iconfont-converter', function() {
 		.pipe(ext('.scss'))
 		.pipe(gulp.dest(input+'/sass/assets/'))
 })
-
-// ----- Task handling SCSS compile, depending on mode, file will either be minified or extended
-
-gulp.task('styles',['iconfont-converter'] , function() {
-	gulp.src( input+'/sass/**/*.scss' )
-
-		.pipe( changed( input+'/sass/**' ) )
-		.pipe( sass( { style: 'expanded' } ) )
-		.pipe( prefix() )
-		.pipe( gulpif( isMin, minifycss( { keepBreaks: false } ) ) )
-		.pipe( gulp.dest( output+'/css' ) )
-});
-
-// ----- Task handling javascript file for top-loading on a site
+// ----- Task handling creating two javascript files, one for top and one for bottom
+// ----- Only force-loads should go in the top section of this to minimize load-time
 
 gulp.task('js-top', function() {
 	gulp.src([
-			bower+'/angular/angular.min.js',
-			bower+'/modernizr/modernizr.js',
-			bower+'/respond/src/respond.js'
+			'bower_components/modernizr/modernizr.js',
+			'bower_components/respond/src/respond.js'
 			])
 		.pipe( concat( 'all.top.js' ) )
-		.pipe( annotate() )
-		.pipe( uglify() )
+		.pipe( gulpif (ismin, uglify() ) )
 		.pipe( gulp.dest( output+'/js' ) )
 })
-
-// ----- Precompile of bottom-js, for the site
 
 gulp.task('js-bottom', function() {
 	gulp.src([
-			bower+'/jquery/dist/jquery.js',
-			bower+'/blazy/blazy.js',
-			bower+'/videojs/dist/video-js/video.js',
-			bower+'/dash/lib/dash.js',
-			input+'/angular/*.js',
 			input+'/js/*.js'
 			])
 		.pipe( changed( input+'/js/**' ) )
-		.pipe( gulpif ( isMin, uglify({mangle: false}) ) )
-		.pipe( concat( 'all.bottom.precompile.js' ) )
-		.pipe( gulp.dest( output+'/js' ) )
+		.pipe( concat( 'js.bottom.js' ) )
+		.pipe( gulp.dest( input+'/temp/js' ) )
 });
 
-// ----- Specific angular compiler for minifying and fixing Angular to look right
-
-gulp.task('angularControllers', function() {
-	gulp.src('source/controllers/*.js')
-	.pipe( changed( input+'/controllers/**' ) )
-	.pipe( concat( 'controllers.js' ) )
-	.pipe( annotate() )
-	.pipe(gulp.dest( output+'/js' ))
-})
-
-// ----- Compiling Angular and js-bottom into 1 file for less requests
-
-gulp.task('compile-bottom-js', ['js-bottom', 'angularControllers'], function() {
+gulp.task('js-angular', ['js-bottom'], function() {
 	gulp.src([
-			output+'/js/all.bottom.precompile.js',
-			output+'/js/controllers.js'
-		])
-	.pipe( concat( 'all.bottom.js' ) )
-	.pipe( gulpif ( isMin, uglify({mangle: false}) ) )
-	.pipe( gulp.dest( output+'/js') )
+		'bower_components/jquery/dist/jquery.min.js',
+		'bower_components/angular/angular.min.js',
+		'bower_components/angular-route/angular-route.min.js',
+		input+'/temp/js/*.js',
+		input+'/angular/app.js',
+		input+'/angular/config.js',
+		input+'/angular/services.js',
+		input+'/angular/controllers.js',
+		input+'/temp/js/js.bottom.js'
+	])
+	.pipe( concat('all.bottom.js') )
+	.pipe( gulpif ( ismin, uglify() ) )
+	.pipe( gulp.dest(output+'/js') )
+});
+
+gulp.task('js',['js-top', 'js-angular'], function() {});
+
+// ------ Handling the template design, including partials for Angular
+
+gulp.task('partials', function() {
+	gulp.src( input+'/template/partials/*.jade' )
+		.pipe( jade() )
+		.pipe( gulp.dest('./partials/') )
 })
 
-// ----- Bringing it all together!
-
-gulp.task('js', ['js-top', 'compile-bottom-js'], function() {});
-
-// ----- Task handling for compiling jade files for template generation
-
-gulp.task('template', function() {
+gulp.task('template', ['partials'],function() {
  	gulp.src( input+'/template/*.jade' )
 	 	.pipe( changed( input+'/template/**/*.jade' ) )
 	 	.pipe( jade() )
@@ -125,10 +109,11 @@ gulp.task('template', function() {
 gulp.task('watch-only', function() {
 	gulp.watch( input+'/template/**/*.jade', ['template'] );
 	gulp.watch( input+'/sass/**/*.scss', ['styles'] );
-	gulp.watch( input+'/controllers/**/*.js', ['js'] );
 	gulp.watch( input+'/js/**/*.js', ['js'] );
+	gulp.watch( input+'/angular/*.js', ['js']);
 });
 
-// ----- Manages everything, run gulp, gulp --mode min for minifed output
+// ----- Manages everything, run gulp, gulp --mode min for minified
 
-gulp.task('default', ['template', 'styles', 'js', 'watch-only'],function() {});
+gulp.task('watch', ['default', 'watch-only'], function() {});
+gulp.task('default',['template', 'styles', 'js'], function() {});

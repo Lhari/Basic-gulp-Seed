@@ -1,5 +1,5 @@
 div.offcanvas__inner
-	div.offcanvas__content(data-ng-controller="streamCntrl")
+	div.offcanvas__content(data-ng-controller="menuCtrl")
 		ul
 			li(data-ng-repeat="x in streamer")
-				a(href="./stream.html#?user={{ x.Streamer }}" data-ng-click="refresher()") {{ x.Streamer }}
+				a(href="#/stream/user/{{ x.Streamer }}") {{ x.Streamer }}

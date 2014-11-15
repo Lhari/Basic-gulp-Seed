@@ -85,6 +85,9 @@ $breakpoints: 'palm', 'lap', 'lap-and-up', 'portable', 'desk', 'desk-wide';
   @extend %clearfix;
   float: right;
 }
+.grid--reverse {
+  float: right;
+}
 
 .grid-group {
   @extend %clearfix;
