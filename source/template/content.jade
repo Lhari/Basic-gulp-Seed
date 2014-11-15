@@ -1,0 +1,89 @@
+div.grid-group
+
+	span(ng-if="numberOfImages == 1")
+		div.grid.size-12
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+
+	span(ng-if="numberOfImages == 2")
+		div.grid.size-6
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-6
+			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+
+	span(ng-if="numberOfImages == 3")
+		div.grid.size-6
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+
+	span(ng-if="numberOfImages == 4")
+		div.grid.size-6
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+
+	span(ng-if="numberOfImages == 5")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+		div.grid.size-6.grid--reverse
+			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+
+	span(ng-if="numberOfImages == 6")
+		div.grid.size-6.grid--reverse
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+		div.grid.size-6.grid--reverse
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[5].ImageName+ '.' + images[5].fileExt}})")
+	
+	span(ng-if="numberOfImages == 7")
+		div.grid.size-6.grid--reverse
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+		div.grid.size-6.grid--reverse
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[5].ImageName+ '.' + images[5].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[6].ImageName+ '.' + images[6].fileExt}})")
+
+span(ng-if="numberOfImages == 9")
+		div.grid.size-6
+			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+		div.grid.size-6.grid--reverse
+			div.block.square(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[5].ImageName+ '.' + images[5].fileExt}})")
+		div.grid.size-3
+			div.block.square(style="background-image: url(./assets/images/{{images[6].ImageName+ '.' + images[6].fileExt}})")
+		div.grid.size-6
+			div.block.rectangle(style="background-image: url(./assets/images/{{images[7].ImageName+ '.' + images[7].fileExt}})")
