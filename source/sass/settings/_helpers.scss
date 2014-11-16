@@ -7,7 +7,7 @@ html {
 body {
 	width: 100%;
 	position: relative;
-	background: $base-color1;
+	background: darken($base-color1, 17%);
 	color: $base-color2;
 	font-family: 'Open Sans';
 }

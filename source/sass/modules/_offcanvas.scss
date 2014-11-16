@@ -8,7 +8,6 @@
 	height: 100%;
 	position: relative;
 	transform: translateX(0);
-	box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.75);
 	transition: all 300ms ease;
 	background: $base-color1;
 }
@@ -23,13 +22,26 @@
 	bottom: 0;
 	right: 0;
 	transition: all 300ms ease;
+
+	a {
+		
+		width: 100%;
+		padding: $spacing/2 $spacing/2;
+		display: block;
+		color: $puck-blue;
+		@extend %hover;
+
+		&:hover {
+			background: $puck-pink;
+			color: white;
+		}
+	}
 }
 
 .offcanvas__inner {
     height: 100%;
     position: absolute;
     width: 100%;
-    padding: $spacing;
 }
 .on-canvas.show-nav {
 	transform: translateX(-$offcanvasWidth);

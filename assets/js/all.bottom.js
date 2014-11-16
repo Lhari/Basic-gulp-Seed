@@ -318,9 +318,12 @@ angular.module('puckWebApp.controllers', [])
 	var timer;
 
 	$rootScope.loadStreamer = function() {
+
 		loadAPIservice.getStreamers().success(function(response) {
 			$rootScope.streamer = response;
+			$rootScope.numberOfStreamers = $scope.streamer.length;
 			$scope.msg = false;
+			
 
 		}).error(function() {
 			console.log('Something went wrong, Json not delivered correctly');
@@ -337,6 +340,9 @@ angular.module('puckWebApp.controllers', [])
 			function() { 
 				console.log( "Timeout executed", Date.now() );
 				angular.element('#page').scope().myLoop();
+
+				
+
 			}, 3000
 		);
 	}
@@ -346,20 +352,17 @@ angular.module('puckWebApp.controllers', [])
 
 	angular.element('#page').scope().myLoop();
 
-}).controller('fpCntrl', function($scope, $http, loadAPIservice) {
+}).controller('fpCntrl', function($scope, $http, $timeout, loadAPIservice) {
+
+	function frontpageLoop() {
+
+		$timeout (function() {
+			$scope.numberOfStreamers = angular.element('#page').scope().numberOfStreamers;
+			frontpageLoop();
+		}, 5000);
+	}
 	
-	$scope.images = [
-		'./assets/images/luna-death.jpg',
-		'./assets/images/redbro-darksouls-2.jpg'
-	]
-
-
-	loadAPIservice.getFront().success(function(response) {
-		var frontpage = response;
-		$scope.numberOfImages = frontpage.length;
-		$scope.images = frontpage;
-
-	});
+	frontpageLoop();
 
 }).controller('streamCtrl', function($scope, $location) {
 	var user = $location.path();

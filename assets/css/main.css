@@ -118,7 +118,7 @@ html {
 body {
   width: 100%;
   position: relative;
-  background: #353535;
+  background: #0a0a0a;
   color: #ffffff;
   font-family: 'Open Sans'; }
 
@@ -210,7 +210,7 @@ a {
 .align-center {
   text-align: center; }
 
-.menu li a {
+.menu li a, .offcanvas a {
   -webkit-transition: all 500ms ease 0s;
           transition: all 500ms ease 0s; }
 
@@ -491,7 +491,6 @@ img.grid {
   -webkit-transform: translateX(0);
       -ms-transform: translateX(0);
           transform: translateX(0);
-  box-shadow: 0 0 50px 10px rgba(0, 0, 0, 0.75);
   -webkit-transition: all 300ms ease;
           transition: all 300ms ease;
   background: #353535; }
@@ -508,12 +507,19 @@ img.grid {
   right: 0;
   -webkit-transition: all 300ms ease;
           transition: all 300ms ease; }
+  .offcanvas a {
+    width: 100%;
+    padding: 11.04px 11.04px;
+    display: block;
+    color: #61bfff; }
+    .offcanvas a:hover {
+      background: #d06bcb;
+      color: white; }
 
 .offcanvas__inner {
   height: 100%;
   position: absolute;
-  width: 100%;
-  padding: 22.08px; }
+  width: 100%; }
 
 .on-canvas.show-nav {
   -webkit-transform: translateX(-325px);

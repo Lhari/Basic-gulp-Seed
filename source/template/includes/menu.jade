@@ -2,4 +2,4 @@ div.offcanvas__inner
 	div.offcanvas__content(data-ng-controller="menuCtrl")
 		ul
 			li(data-ng-repeat="x in streamer")
-				a(href="#/stream/user/{{ x.Streamer }}") {{ x.Streamer }}
+				a(href="#/stream/user/{{ x.Streamer }}" onClick="toggleNav()") {{ x.Streamer }}

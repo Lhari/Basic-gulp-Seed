@@ -1,89 +1,88 @@
 div.grid-group
-
-	span(ng-if="numberOfImages == 1")
+	span(ng-if="numberOfStreamers == 1")
 		div.grid.size-12
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 
-	span(ng-if="numberOfImages == 2")
+	span(ng-if="numberOfStreamers == 2")
 		div.grid.size-6
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-6
-			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 
-	span(ng-if="numberOfImages == 3")
+	span(ng-if="numberOfStreamers == 3")
 		div.grid.size-6
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[2].Streamer }}.png)")
 
-	span(ng-if="numberOfImages == 4")
+	span(ng-if="numberOfStreamers == 4")
 		div.grid.size-6
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[2].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[3].Streamer }}.png)")
 
-	span(ng-if="numberOfImages == 5")
+	span(ng-if="numberOfStreamers == 5")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 		div.grid.size-6.grid--reverse
-			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[2].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[3].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[4].Streamer }}.png)")
 
-	span(ng-if="numberOfImages == 6")
+	span(ng-if="numberOfStreamers == 6")
 		div.grid.size-6.grid--reverse
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[2].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[3].Streamer }}.png)")
 		div.grid.size-6.grid--reverse
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[4].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[5].ImageName+ '.' + images[5].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[5].Streamer }}.png)")
 	
-	span(ng-if="numberOfImages == 7")
+	span(ng-if="numberOfStreamers == 7")
 		div.grid.size-6.grid--reverse
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[2].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
-		div.grid.size-6.grid--reverse
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[3].Streamer }}.png)")
+		div.grid.size-6.grid--last
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[4].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[5].ImageName+ '.' + images[5].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[5].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[6].ImageName+ '.' + images[6].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[6].Streamer }}.png)")
 
-span(ng-if="numberOfImages == 8")
+span(ng-if="numberOfStreamers == 8")
 		div.grid.size-6
-			div.block.square(style="background-image: url(./assets/images/{{images[0].ImageName+ '.' + images[0].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[0].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[1].ImageName+ '.' + images[1].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[1].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[2].ImageName+ '.' + images[2].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[2].Streamer }}.png)")
 		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[3].ImageName+ '.' + images[3].fileExt}})")
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[3].Streamer }}.png)")
 		div.grid.size-6.grid--reverse
-			div.block.square(style="background-image: url(./assets/images/{{images[4].ImageName+ '.' + images[4].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[4].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[5].ImageName+ '.' + images[5].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[5].Streamer }}.png)")
 		div.grid.size-3
-			div.block.square(style="background-image: url(./assets/images/{{images[6].ImageName+ '.' + images[6].fileExt}})")
-		div.grid.size-6
-			div.block.rectangle(style="background-image: url(./assets/images/{{images[7].ImageName+ '.' + images[7].fileExt}})")
+			div.block.square(style="background-image: url(./assets/images/{{ streamer[6].Streamer }}.png)")
+		div.grid.size-6.grid--last
+			div.block.rectangle(style="background-image: url(./assets/images/{{ streamer[7].Streamer }}.png)")
