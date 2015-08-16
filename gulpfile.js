@@ -1,128 +1,225 @@
-/*
-* Advanced gulp task manager
-* Allows direct github pushing with messages
-* Use --mode master and production to push to master and dev branch
-* use --message 'message' to input commit message
-*/
+'use strict';
 
-var	gulp 		= 		require('gulp'),
-	git			=		require('gulp-git'),
-	args		=		require('yargs').argv,
-	gulpif 		=		require('gulp-if'),
-	sass 		= 		require('gulp-sass'),
-	minifycss 	= 		require('gulp-minify-css'),
-	run			=		require('gulp-run'),
-	notify		=		require('gulp-notify'),
-	rename 		= 		require('gulp-rename'),
-	changed 	= 		require('gulp-changed'),
-	watch 		= 		require('gulp-watch'),
-	uglify 		= 		require('gulp-uglify'),
-	concat		=		require('gulp-concat'),
-	prefix 		= 		require('gulp-autoprefixer'),
-	jade 		= 		require('gulp-jade');
+var gulp        = require('gulp'),
+    concat      = require('gulp-concat'),
+    sass        = require('gulp-sass'),
+    uglify      = require('gulp-uglify'),
+    watch       = require('gulp-watch'),
+    prefix      = require('gulp-autoprefixer'),
+    jade        = require('gulp-jade'),
+    del         = require('del'),
+    server      = require('./server'),
+    watch 		  = require('gulp-watch'),
+    browserSync = require('browser-sync');
 
-var isMaster = args.mode === 'master';
-var isProduction = args.mode === 'production';
-var message = args.message;
+//
+// PATHS
+// -------------------------------------------------------------
+var
 
-/*
-* Set input and output from gulpfile
-*/
+projectname   = 'DecoGroupTpl',
 
-var input = 'source';
-var output = 'assets';
+// Default
+CURRENT       = 'src/',
+PROTOTYPE     = 'www/prototype/',
+ASSETS        = 'assets/',
 
-// ----- Task handling SCSS compile, depending on mode, file will either be minified or extended
+// Magento 
+vendor        = 'vendor/kirchbergerknorr/magento/',
+www           = 'www/',
+mage_styles   = 'skin/frontend/'+ projectname +'/default/',
 
-gulp.task('styles', function() {
-	gulp.src( input+'/sass/**/*.scss' )
-		.pipe( changed( input+'/sass/**' ) )
-		.pipe( sass( { style: 'expanded' } ) )
-		.pipe( prefix() )
-		.pipe( gulpif( isMaster, minifycss( { keepBreaks: false } ) ) )
-		.pipe( gulp.dest( output+'/css' ) )
+
+SOURCE    = CURRENT + 'assets/',
+BOWER     = 'bower_components/',
+
+FONTS     = 'fonts/',
+JS        = 'scripts/',
+JADE      = 'jade/',
+IMAGES    = 'images/',
+STYLES    = 'styles/',
+PUBLIC    = 'public/';
+
+//
+// TASKS
+// -------------------------------------------------------------
+gulp.task('css', function() {
+  gulp.src('src/assets/styles/**.scss')
+    .pipe(sass({ errLogToConsole: true }))
+    .pipe(prefix("last 1 version", "> 1%", "ie 9")
+      .on('error', function (error) { console.warn(error.message); }))
+    .pipe(gulp.dest('src/Frontend/css/'))
+    .pipe(gulp.dest(vendor + mage_styles + 'css'))
+    .pipe(gulp.dest(www + mage_styles + 'css'))
 });
 
-// ----- Task handling javascript file for top-loading on a site
-
-gulp.task('js-top', function() {
-	gulp.src([
-			'bower_components/modernizr/modernizr.js',
-			'bower_components/respond/src/respond.js'
-			])
-		.pipe( concat( 'all.top.js' ) )
-		.pipe( gulpif (isMaster, uglify() ) )
-		.pipe( gulp.dest( output+'/js' ) )
-})
-
-// ----- Task handling javascript file for bottom-loading on a site
-
-gulp.task('js-bottom', function() {
-	gulp.src([
-			'bower_components/jquery/jquery.js',
-			'bower_components/blazy/blazy.js',
-			'source/js/partials/*.js'
-			])
-		.pipe( changed( input+'/js/**' ) )
-		.pipe( concat( 'all.bottom.js' ) )
-		.pipe( gulpif ( isMaster, uglify() ) )
-		.pipe( gulp.dest( output+'/js' ) )
+gulp.task('fonts', function() {
+  var FILES = SOURCE + FONTS + '*.*';
+  gulp.src(FILES)
+    .pipe( gulp.dest('src/Frontend/fonts/'))
+	.pipe(gulp.dest(vendor + mage_styles + 'fonts'))
+	.pipe(gulp.dest(www + mage_styles + 'fonts'))
 });
 
-// ----- Task handling for compiling jade files for template generation
-// TODO: Add load from correct includes file
+gulp.task('vendor', function() {
+  var FILES = [
+    BOWER + 'modernizr/modernizr.js',
+    BOWER + 'respond/src/respond.js' ];
+  gulp.src(FILES)
+      .pipe(concat('vendor.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('src/Frontend/js'))
+      .pipe(gulp.dest(vendor + mage_styles + 'js'))
+	  .pipe(gulp.dest(www + mage_styles + 'js'))
+});
+
+gulp.task('public', function() {
+  var FILES = SOURCE + PUBLIC + '**/*.*';
+  gulp.src(FILES)
+    .pipe( gulp.dest('src/Public/'))
+    .pipe( gulp.dest(vendor))
+    .pipe( gulp.dest(www));
+});
+
+gulp.task('js', function() {
+  var FILES = [ 
+    BOWER + 'jquery/dist/jquery.js',
+    BOWER + 'selectize/dist/js/standalone/selectize.js',
+    BOWER + 'fitvids/jquery.fitvids.js',
+    BOWER + 'jquery-validate/dist/jquery.validate.js',
+    SOURCE + JS + 'globals/*.js', 
+    SOURCE + JS + '*.js' 
+  ];
+  gulp.src(FILES)
+    //.pipe(uglify()
+          //.on('error', function (error) { console.warn(error.message); }))
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('src/Frontend/js'))
+    .pipe(gulp.dest(vendor + mage_styles + 'js'))
+	.pipe(gulp.dest(www + mage_styles + 'js'))
+});
 
 gulp.task('template', function() {
- 	gulp.src( input+'/template/*.jade' )
-	 	.pipe( changed( input+'/template/**/*.jade' ) )
-	 	.pipe( jade() )
-	 	.pipe( gulp.dest( './' ) )
-});
+	gulp.src('src/Template/**/*')
+	.pipe(gulp.dest('www/app/design/frontend/DecoGroupTpl/'))
+	.pipe(gulp.dest(vendor + 'app/design/frontend/DecoGroupTpl/'))
+})
 
-// ----- Watch task to make sure scripts gets run on local development
+gulp.task('media', function() {
+	gulp.src('src/media/**/*')
+	.pipe(gulp.dest('www/media/'))
+	.pipe(gulp.dest(vendor + 'media/'))
+})
 
 gulp.task('watch-only', function() {
-	gulp.watch( input+'/template/*.jade', ['template'] );
-	gulp.watch( input+'/sass/**/*.scss', ['styles'] );
-	gulp.watch( input+'/js/**/*.js', ['js-bottom'] );
+	gulp.watch( 'src/Template/**/*.*', ['template'] );
+	gulp.watch( 'src/assets/styles/**/*.scss', ['css'] );
+	gulp.watch( 'src/assets/scripts/**/*.js', ['js'] );
 });
 
-// ----- Pushes to development branch on github
 
-gulp.task('production', function() {
-	return gulp.src('')
-		//.pipe( git.checkout( 'dev' ) )
-		.pipe( git.add() )
-		.pipe( git.commit( message ) )
-		.pipe( git.push() )
-		.pipe( notify( 'Files pushed to dev branch of Github with the title: '+message ) )
+// Prototype
+// ----------------------------------
+
+// Browsersync
+gulp.task('browser-sync', function() {
+  browserSync({ server: { baseDir: PROTOTYPE } });
 });
 
-// ----- Pushes to master branch on github
+// Jade
+gulp.task('jade', function() {
+  var FILES = CURRENT + 'jade/*.jade';
+  var categories = require('./'+ CURRENT + ASSETS + 'data/categories.json');
 
-gulp.task('master', function() {
-	return gulp.src('')
-		//.pipe( git.checkout( 'master', {args: '-b'} ) )
-		.pipe( git.add() )
-		.pipe( git.commit( message ) )
-		.pipe( git.push() )
-		.pipe( notify( 'Files pushed to master branch of Github with the title: '+message ) )
-		.pipe( notify( 'Version number: 1.0.0' ) )
+  gulp.src(FILES)
+    .pipe(jade({ 
+      pretty: true, 
+      locals: categories
+    })
+      .on('error', function (error) { console.warn(error.message); }))
+    .pipe(gulp.dest(PROTOTYPE))
+    .pipe(browserSync.reload({stream: true, once: true}) );
 });
 
-// ----- Manages everything, run gulp, gulp --mode master/production --message 'message' for correct output
-
-gulp.task('default', function() {
-	gulp.run('template');
-	gulp.run('styles');
-	gulp.run('js-top');
-	gulp.run('js-bottom');
-
-	if(isProduction) {
-		gulp.run( 'production' )
-	} else if(isMaster) {
-		gulp.run( 'master' )
-	} else {
-		gulp.run( 'watch-only' )
-	}
+// Images
+gulp.task('prototype-images', function() {
+  var FILES = SOURCE + IMAGES + '*.*';
+  gulp.src(FILES)
+    .pipe( gulp.dest(PROTOTYPE + ASSETS + IMAGES) );
 });
+
+// CSS
+gulp.task('prototype-css', function() {
+  gulp.src('src/assets/styles/**.scss')
+    .pipe(sass({ errLogToConsole: true }))
+    .pipe(prefix("last 1 version", "> 1%", "ie 9")
+      .on('error', function (error) { console.warn(error.message); }))
+    .pipe(gulp.dest(PROTOTYPE + ASSETS + STYLES))
+});
+
+// Public
+gulp.task('prototype-public', function() {
+  var FILES = SOURCE + PUBLIC + '**/*.*';
+  gulp.src(FILES)
+    .pipe( gulp.dest(PROTOTYPE));
+});
+
+// Fonts
+gulp.task('prototype-fonts', function() {
+  var FILES = SOURCE + FONTS + '*.*';
+  gulp.src(FILES)
+    .pipe( gulp.dest(PROTOTYPE + ASSETS + FONTS));
+});
+
+// Vendor
+gulp.task('prototype-vendor', function() {
+  var FILES = [
+    BOWER + 'modernizr/modernizr.js',
+    BOWER + 'respond/src/respond.js' ];
+  gulp.src(FILES)
+      .pipe(concat('vendor.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest(PROTOTYPE + ASSETS + JS));
+});
+
+// JS
+gulp.task('prototype-js', function() {
+  var FILES = [ 
+    BOWER + 'jquery/dist/jquery.js',
+    BOWER + 'selectize/dist/js/standalone/selectize.js',
+    BOWER + 'fitvids/jquery.fitvids.js',
+    BOWER + 'jquery-validate/dist/jquery.validate.js',
+    SOURCE + JS + 'globals/*.js',
+    SOURCE + JS + '*.js' 
+  ];
+  gulp.src(FILES)
+    //.pipe(uglify()
+          //.on('error', function (error) { console.warn(error.message); }))
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest(PROTOTYPE + ASSETS + JS))
+    .pipe(browserSync.reload({stream: true, once: true}));
+});
+
+// Clean
+gulp.task('clean', function(cb){
+  del([PROTOTYPE], cb);
+});
+
+// Watch
+gulp.task('watch-prototype', ['browser-sync'], function() {
+  gulp.watch(SOURCE + STYLES + '**/*.scss',['prototype-css']);
+
+  gulp.watch(CURRENT + '**/*.jade',['jade']);
+
+  gulp.watch(SOURCE + JS + '**/*.js',['prototype-js']);
+
+  gulp.watch(SOURCE + IMAGES + '*.*',['prototype-images']);
+
+  gulp.watch(SOURCE + PUBLIC + '*.*',['prototype-public']);
+});
+
+gulp.task('prototype', ['prototype-fonts', 'prototype-js', 'prototype-public', 'prototype-vendor', 'prototype-css', 'jade', 'prototype-images', 'watch-prototype'])
+
+
+gulp.task('watch', ['js', 'vendor', 'public', 'css', 'fonts', 'template', 'media', 'watch-only'])
+gulp.task('default', ['js', 'vendor', 'public', 'css', 'fonts', 'template', 'media'])
