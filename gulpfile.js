@@ -1,6 +1,6 @@
 'use strict';
 
-<<<<<<< HEAD
+
 var
 gulp        = require('gulp'),
 concat      = require('gulp-concat'),
@@ -13,39 +13,18 @@ del         = require('del'),
 server      = require('./server'),
 watch		= require('gulp-watch'),
 browserSync = require('browser-sync'),
-=======
-var gulp        = require('gulp'),
-    concat      = require('gulp-concat'),
-    sass        = require('gulp-sass'),
-    uglify      = require('gulp-uglify'),
-    watch       = require('gulp-watch'),
-    prefix      = require('gulp-autoprefixer'),
-    jade        = require('gulp-jade'),
-    del         = require('del'),
-    server      = require('./server'),
-    watch 		  = require('gulp-watch'),
-    browserSync = require('browser-sync');
->>>>>>> 28742b7b1d206affb998d7aabf565f83de5740f9
+
 
 //
 // PATHS
 // -------------------------------------------------------------
-<<<<<<< HEAD
-
-=======
-var
->>>>>>> 28742b7b1d206affb998d7aabf565f83de5740f9
 
 projectname   = 'DecoGroupTpl',
 
 // Default
-<<<<<<< HEAD
+
 CURRENT       = '',
 PROTOTYPE     = '/prototype/',
-=======
-CURRENT       = 'src/',
-PROTOTYPE     = 'www/prototype/',
->>>>>>> 28742b7b1d206affb998d7aabf565f83de5740f9
 ASSETS        = 'assets/',
 
 // Magento 
@@ -53,13 +32,10 @@ vendor        = 'vendor/kirchbergerknorr/magento/',
 www           = 'www/',
 mage_styles   = 'skin/frontend/'+ projectname +'/default/',
 
-<<<<<<< HEAD
 // Compiled
 
 CONTENT = 'public_html/',
 COMPILED =  CONTENT + 'compiled/',
-=======
->>>>>>> 28742b7b1d206affb998d7aabf565f83de5740f9
 
 SOURCE    = CURRENT + 'assets/',
 BOWER     = 'bower_components/',
@@ -75,7 +51,7 @@ PUBLIC    = 'public/';
 // TASKS
 // -------------------------------------------------------------
 gulp.task('css', function() {
-<<<<<<< HEAD
+
   gulp.src(SOURCE + '/styles/**.scss')
     .pipe(sass({ errLogToConsole: true }))
     .pipe(prefix("last 1 version", "> 1%", "ie 9")
