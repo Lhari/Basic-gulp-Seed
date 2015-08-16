@@ -1,0 +1,32 @@
+
+// Accent Colors
+$color-primary:      #36a63f;
+$color-secondary:    #01acec;
+$color-tertiary:     #fce046;
+$color-quaternary:   #d8a437;
+
+$color-light:        #fff;
+$color-dark:         #000;
+
+
+// Site colors
+$color-offcanvas: 	 		#374248;
+$color-offcanvas-dark: 	#23272A;
+
+$color-accordion-header: #8A8A8A;
+
+// Fonts
+$color-font-base:    #444444;
+$color-body:         darken($color-light, 2%);
+
+// Borders
+$color-border-light: darken($color-body, 10%);
+$color-border-dark:  darken($color-body, 25%);
+
+// Shadows
+$color-shadow-light: darken($color-body, 5%);
+$color-shadow-dark:  darken($color-body, 15%);
+
+// States / Alerts
+$color-error:        #ff6101;
+$color-valid:        #36a63f;

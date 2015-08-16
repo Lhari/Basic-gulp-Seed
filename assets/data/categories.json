@@ -1,0 +1,141 @@
+{
+	"categories": [
+		{
+			"category": "Mørke farver",
+			"slug": "darks",
+			"colors": [
+				{
+					"slug": "grey",
+					"color": "Grå",
+					"hex": "#A39E9A",
+					"img": "",
+					"info": "Denne farve er grå"
+				},
+				{
+					"slug": "brown",
+					"color": "Brun",
+					"hex": "#7B7168",
+					"img": "",
+					"info": "Denne farve er brun"
+				},
+				{
+					"slug": "darkbrown",
+					"color": "Mørkebrun",
+					"hex": "#514C4E",
+					"img": "",
+					"info": "Denne farve er mørkebrun"
+				},
+				{
+					"slug": "bluegrey",
+					"color": "Blågrå",
+					"hex": "#898E8D",
+					"img": "",
+					"info": "Denne farve er blågrå"
+				}
+			]
+		},
+		{
+			"category": "Blå farver",
+			"slug": "blues",
+			"colors": [
+				{
+					"slug": "blue1",
+					"color": "Blå 1",
+					"hex": "#708B9F",
+					"img": "",
+					"info": "Denne farve er Blå 1"
+				},
+				{
+					"slug": "blue2",
+					"color": "Blå 2",
+					"hex": "#91ACC0",
+					"img": "",
+					"info": "Denne farve er Blå 2"
+				},
+				{
+					"slug": "blue3",
+					"color": "Blå 3",
+					"hex": "#3C586C",
+					"img": "",
+					"info": "Denne farve er Blå 3"
+				},
+				{
+					"slug": "blue4",
+					"color": "Blå 4",
+					"hex": "#657683",
+					"img": "",
+					"info": "Denne farve er Blå 4"
+				}
+			]
+		},
+		{
+			"category": "Røde farver",
+			"slug": "reds",
+			"colors": [
+				{
+					"slug": "red1",
+					"color": "Rød 1",
+					"hex": "#933E4F",
+					"img": "",
+					"info": "Denne farve er Rød 1"
+				},
+				{
+					"slug": "red2",
+					"color": "Rød 2",
+					"hex": "#A66E79",
+					"img": "",
+					"info": "Denne farve er Rød 2"
+				},
+				{
+					"slug": "red3",
+					"color": "Rød 3",
+					"hex": "#532F3A",
+					"img": "",
+					"info": "Denne farve er Rød 3"
+				},
+				{
+					"slug": "red4",
+					"color": "Rød 4",
+					"hex": "#D4AAB4",
+					"img": "",
+					"info": "Denne farve er Rød 4"
+				}
+			]
+		},
+		{
+			"category": "Grønne farver",
+			"slug": "greens",
+			"colors": [
+				{
+					"slug": "green1",
+					"color": "Grøn 1",
+					"hex": "#7E8848",
+					"img": "",
+					"info": "Denne farve er Grøn 1"
+				},
+				{
+					"slug": "green2",
+					"color": "Grøn 2",
+					"hex": "#8B8F75",
+					"img": "",
+					"info": "Denne farve er Grøn 2"
+				},
+				{
+					"slug": "green3",
+					"color": "Grøn 3",
+					"hex": "#4B5323",
+					"img": "",
+					"info": "Denne farve er Grøn 3"
+				},
+				{
+					"slug": "green4",
+					"color": "Grøn 4",
+					"hex": "#B7BA9C",
+					"img": "",
+					"info": "Denne farve er Grøn 4"
+				}
+			]
+		}
+
+	]
+}

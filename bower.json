@@ -1,0 +1,11 @@
+{
+  "name": "Prototype Seed",
+  "version": "0.0.5",
+  "dependencies": {
+    "modernizr": "^2.8.3",
+    "respond": "^1.4.2",
+    "jquery": "~2.1.4",
+    "selectize": "~0.12.1",
+    "jquery-validate": "~1.14.0"
+  }
+}

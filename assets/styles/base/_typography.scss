@@ -1,0 +1,176 @@
+// Typography
+//
+// Styleguide 3.
+
+// Font Families
+$font-family-base:   Tahoma, Arial, sans-serif;
+
+// Font Sizes
+$font-size-base:     14px;
+
+// Above normal scale (anything absurdly big) - based on SI prefixes
+$font-size-giga:      50px;
+$font-size-mega:      45px;
+$font-size-kilo:      40px;
+
+// Normal scale (h1-h6) - based on Greek aplphabet 
+$font-size-alpha:     31px;
+$font-size-beta:      24px;
+$font-size-gamma:     18px;
+$font-size-delta:     16px;
+$font-size-epsilon:   15px;
+$font-size-zeta:      $font-size-base;
+
+// Below normal scale - based on SI prefixes
+$font-size-milli:     13px;
+$font-size-micro:     12px;
+$font-size-nano:      11px;
+
+
+// Inbetween normal scale
+$font-size-hecto:     32px;
+
+
+// Font Weights
+$font-weight-base:   400;
+$font-weight-light:  300;
+$font-weight-heavy:  700;
+
+// Line Heights - based on SI prefixes
+$line-height-base:          1.4285;
+
+
+$line-height-milli:         1.2222;
+$line-height-micro:         1.1;
+
+// Font Size Helpers Classes
+.font-alpha {
+  font-size: $font-size-alpha !important;
+}
+
+.font-beta {
+  font-size: $font-size-beta !important;
+}
+
+.font-gamma {
+  font-size: $font-size-gamma !important;
+}
+
+.font-milli {
+  font-size: $font-size-milli !important;
+}
+
+.font-micro {
+  font-size: $font-size-micro !important;
+}
+
+.font-nano {
+  font-size: $font-size-nano !important;
+}
+
+%limit-width {
+  max-width: 40rem;
+}
+
+%push-bottom {
+  margin-bottom: $spacing;
+}
+
+%flush-top {
+  margin-top: 0;
+}
+
+%word-space--small {
+  word-spacing: -0.1em;
+}
+
+
+// Base headers
+//
+// Markup: 
+// <h1>Heading (h1)</h1>
+// <h2>Heading (h2)</h2>
+// <h3>Heading (h3)</h3>
+// <h4>Heading (h4)</h4>
+// <h5>Heading (h5)</h5>
+// <h6>Heading (h6)</h6>
+// 
+// Styleguide 3.1
+
+// Header classes
+//
+// Use these to get a specific header without using a header tag
+//
+// Markup:
+// <span class="{$modifiers}">{$modifiers}</span>
+//
+// .alpha                     - h1
+// .beta                      - h2
+// .gamma                     - h3
+// .delta                     - h4
+// .epsilon                   - h5
+// .zeta                      - h6
+//
+// Styleguide 3.2
+
+h1,
+.alpha {
+  @extend %limit-width;
+  @extend %push-bottom;
+  @extend %flush-top;
+  font-size: $font-size-alpha;
+  font-weight: $font-weight-base;
+  margin-bottom: $spacing;
+  line-height: $line-height-micro;
+}
+
+h2,
+.beta,
+.lead {
+  @extend %limit-width;
+  @extend %push-bottom;
+  @extend %flush-top;
+  font-size: $font-size-beta;
+  font-weight: $font-weight-base;
+  margin-bottom: $spacing;
+  line-height: $line-height-micro;
+}
+
+h3, 
+.gamma, {
+  @extend %limit-width;
+  @extend %push-bottom;
+  @extend %flush-top;
+  @extend .caps;
+  font-size: $font-size-gamma;
+  font-weight: $font-weight-base;
+  margin-bottom: $spacing;
+}
+
+h4, .delta,
+h5, .epsilon,
+h6, .zeta {
+  @extend %limit-width;
+  @extend %flush-top;
+  font-weight: $font-weight-base;
+  margin-bottom: 0;
+}
+
+h4, 
+.delta, {
+  font-size: $font-size-delta;
+}
+
+h5, 
+.epsilon, {
+  font-size: $font-size-epsilon;
+}
+
+h6, 
+.zeta, {
+  font-size: $font-size-zeta;
+}
+
+p {
+  @extend %limit-width;
+}
