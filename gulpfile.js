@@ -98,6 +98,13 @@ gulp.task('js', function() {
 });
 
 gulp.task('template', function() {
+	var FILES = SOURCE + JADE + '/*.jade';
+	gulp.src(FILES)
+    	.pipe(jade({ 
+      		pretty: true
+   		})
+      	.on('error', function (error) { console.warn(error.message); }))
+    .pipe(gulp.dest(CONTENT))
 })
 
 gulp.task('media', function() {
