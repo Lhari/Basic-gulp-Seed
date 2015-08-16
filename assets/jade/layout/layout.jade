@@ -1,0 +1,22 @@
+doctype html
+html.no-js(lang='')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    title Prototype: Decogroup
+    meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet' href='compiled/css/styles.css')
+    script(src='compiled/scripts/vendor.js')
+
+  body
+    .oncanvas.js-oncanvas
+      include header
+        
+      block content
+
+      include footer
+
+    include offcanvas
+
+    block scripts
+      script(src='assets/scripts/main.js')
